@@ -20,6 +20,10 @@ public class Car {
     private Date registered;
     private String owner;
 
+    public Car() {
+
+    }
+
     public Long getId() {
         return id;
     }

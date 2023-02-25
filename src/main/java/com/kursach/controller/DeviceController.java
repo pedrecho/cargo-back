@@ -1,9 +1,9 @@
 package com.kursach.controller;
 
 
-import com.kursach.entity.Book;
-import com.kursach.repository.BookRepository;
-import com.kursach.service.BookService;
+import com.kursach.entity.Device;
+import com.kursach.repository.DeviceRepository;
+import com.kursach.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,39 +13,39 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/book")
-public class BookController {
+@RequestMapping("/device")
+public class DeviceController {
 
     @Autowired
-    private BookService bookService;
+    private DeviceService deviceService;
 
-    private final BookRepository book;
+    private final DeviceRepository device;
 
-    BookController(BookRepository book) {
-        this.book = book;
+    DeviceController(DeviceRepository device) {
+        this.device = device;
     }
 
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('USER')")
-    public Optional<Book> GetById(@PathVariable(name = "id") Long id) {
-        return this.book.findById(id);
+    public Optional<Device> GetById(@PathVariable(name = "id") Long id) {
+        return this.device.findById(id);
     }
 
     @PostMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('USER')")
     public HttpStatus Delete(@PathVariable(name = "id") Long id) {
-        return bookService.Delete(id);
+        return deviceService.Delete(id);
     }
 
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
-    public List<Book> GetAll() {
-        return this.book.findAll();
+    public List<Device> GetAll() {
+        return this.device.findAll();
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('USER')")
-    public HttpStatus Save(Book book) {
-        return bookService.Save(book);
+    public HttpStatus Save(Device device) {
+        return deviceService.Save(device);
     }
 }

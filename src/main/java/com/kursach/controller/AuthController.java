@@ -9,20 +9,16 @@ import com.kursach.security.JwtHelper;
 import com.kursach.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * The auth controller to handle login requests
@@ -49,7 +45,7 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping(path = "login", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @PostMapping(path = "login")
     public LoginResult login(
             @RequestParam String username,
             @RequestParam String password) {
@@ -67,7 +63,6 @@ public class AuthController {
 
             String roles = String.join(" ", user.getRoles().stream().map(Role::getName).toArray(String[]::new));
             claims.put(WebSecurityConfig.AUTHORITIES_CLAIM_NAME, roles);
-//            claims.put("userId", String.valueOf(1));
 
             String jwt = jwtHelper.createJwtForClaims(username, claims);
             return new LoginResult(jwt);
@@ -76,7 +71,7 @@ public class AuthController {
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
     }
 
-    @PostMapping(path="signup", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @PostMapping(path="signup")
     public boolean Registration(User user) {
         return userService.saveUser(user);
     }
