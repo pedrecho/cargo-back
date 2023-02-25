@@ -2,6 +2,7 @@ package com.kursach.controller;
 
 import com.kursach.WebSecurityConfig;
 import com.kursach.controller.resource.LoginResult;
+import com.kursach.entity.Role;
 import com.kursach.entity.User;
 import com.kursach.repository.UserRepository;
 import com.kursach.security.JwtHelper;
@@ -17,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,13 +65,9 @@ public class AuthController {
             Map<String, String> claims = new HashMap<>();
             claims.put("username", username);
 
-            System.out.println(user.getRoles());
-
-            String authorities = user.getAuthorities().stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .collect(Collectors.joining(" "));
-            claims.put(WebSecurityConfig.AUTHORITIES_CLAIM_NAME, authorities);
-            claims.put("userId", String.valueOf(1));
+            String roles = String.join(" ", user.getRoles().stream().map(Role::getName).toArray(String[]::new));
+            claims.put(WebSecurityConfig.AUTHORITIES_CLAIM_NAME, roles);
+//            claims.put("userId", String.valueOf(1));
 
             String jwt = jwtHelper.createJwtForClaims(username, claims);
             return new LoginResult(jwt);
@@ -79,8 +78,6 @@ public class AuthController {
 
     @PostMapping(path="signup", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public boolean Registration(User user) {
-        System.out.println("#####");
-        System.out.println(user);
         return userService.saveUser(user);
     }
 }
