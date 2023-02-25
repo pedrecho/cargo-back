@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/book")
 public class BookController {
 
     @Autowired
@@ -24,25 +25,25 @@ public class BookController {
         this.book = book;
     }
 
-    @GetMapping(path = "/book/{id}")
+    @GetMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('USER')")
     public @ResponseBody Optional<Book> GetById(@PathVariable(name = "id") Long id) {
         return this.book.findById(id);
     }
 
-    @PostMapping(path = "/book/{id}")
+    @PostMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('USER')")
     public HttpStatus Delete(@PathVariable(name = "id") Long id) {
         return bookService.Delete(id);
     }
 
-    @GetMapping(path = "/book")
+    @GetMapping
     @PreAuthorize("hasAuthority('USER')")
     public @ResponseBody List<Book> GetAll() {
         return this.book.findAll();
     }
 
-    @PostMapping(path = "/book")
+    @PostMapping
     @PreAuthorize("hasAuthority('USER')")
     public HttpStatus Save(Book book) {
         return bookService.Save(book);
