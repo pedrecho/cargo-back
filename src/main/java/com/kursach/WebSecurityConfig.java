@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Component
 @EnableGlobalMethodSecurity(
@@ -47,47 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.oauth2ResourceServer()
                 .jwt()
                 .jwtAuthenticationConverter(authenticationConverter());
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
     }
-
-//    @Bean
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//
-//        UserDetails user1 = User
-//                .withUsername("user1")
-//                .authorities("ADMIN", "STAFF_MEMBER")
-//                .passwordEncoder(passwordEncoder::encode)
-//                .password("1234")
-//                .build();
-//        manager.createUser(user1);
-//
-//        UserDetails user2 = User
-//                .withUsername("user2")
-//                .authorities("STAFF_MEMBER")
-//                .passwordEncoder(passwordEncoder::encode)
-//                .password("1234")
-//                .build();
-//        manager.createUser(user2);
-//
-//        UserDetails user3 = User
-//                .withUsername("user3")
-//                .authorities("ASSISTANT_MANAGER", "STAFF_MEMBER")
-//                .passwordEncoder(passwordEncoder::encode)
-//                .password("1234")
-//                .build();
-//        manager.createUser(user3);
-//
-//        UserDetails user4 = User
-//                .withUsername("user4")
-//                .authorities("MANAGER", "STAFF_MEMBER")
-//                .passwordEncoder(passwordEncoder::encode)
-//                .password("1234")
-//                .build();
-//        manager.createUser(user4);
-//
-//        return manager;
-//    }
 
     protected JwtAuthenticationConverter authenticationConverter() {
         JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();

@@ -4,10 +4,11 @@ package com.kursach.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +16,10 @@ public class Book {
     private Long id;
     private String name;
     private String publishing;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date gave;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date returned;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate gave;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate returned;
     private String student;
 
     public Book() {
@@ -49,19 +50,19 @@ public class Book {
         this.publishing = publishing;
     }
 
-    public Date getGave() {
+    public LocalDate getGave() {
         return gave;
     }
 
-    public void setGave(Date gave) {
+    public void setGave(LocalDate gave) {
         this.gave = gave;
     }
 
-    public Date getReturned() {
+    public LocalDate getReturned() {
         return returned;
     }
 
-    public void setReturned(Date returned) {
+    public void setReturned(LocalDate returned) {
         this.returned = returned;
     }
 

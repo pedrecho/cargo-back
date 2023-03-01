@@ -4,6 +4,7 @@ package com.kursach.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,10 +15,9 @@ public class Car {
     @Column(columnDefinition = "serial")
     private Long id;
     private String brand;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date made;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date registered;
+    private int made;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate registered;
     private String owner;
 
     public Car() {
@@ -40,19 +40,19 @@ public class Car {
         this.brand = brand;
     }
 
-    public Date getMade() {
+    public int getMade() {
         return made;
     }
 
-    public void setMade(Date made) {
+    public void setMade(int made) {
         this.made = made;
     }
 
-    public Date getRegistered() {
+    public LocalDate getRegistered() {
         return registered;
     }
 
-    public void setRegistered(Date registered) {
+    public void setRegistered(LocalDate registered) {
         this.registered = registered;
     }
 

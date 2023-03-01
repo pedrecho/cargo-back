@@ -4,10 +4,11 @@ package com.kursach.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "device")
+@Table(name = "devices")
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +16,10 @@ public class Device {
     private Long id;
     private String type;
     private String party;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date importation;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date exportation;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate importation;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate exportation;
     private String driver;
 
     public Device() {
@@ -49,19 +50,19 @@ public class Device {
         this.party = party;
     }
 
-    public Date getImportation() {
+    public LocalDate getImportation() {
         return importation;
     }
 
-    public void setImportation(Date importation) {
+    public void setImportation(LocalDate importation) {
         this.importation = importation;
     }
 
-    public Date getExportation() {
+    public LocalDate getExportation() {
         return exportation;
     }
 
-    public void setExportation(Date exportation) {
+    public void setExportation(LocalDate exportation) {
         this.exportation = exportation;
     }
 

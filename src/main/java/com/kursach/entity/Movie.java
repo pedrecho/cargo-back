@@ -4,6 +4,8 @@ package com.kursach.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -15,8 +17,10 @@ public class Movie {
     private Long id;
     private String name;
     private String studio;
-    @DateTimeFormat(pattern="yyyy/MM/dd hh:mm:ss")
-    private Date datetime;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate date;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime time;
     private int count;
 
     public Movie() {
@@ -47,12 +51,12 @@ public class Movie {
         this.studio = studio;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getCount() {
@@ -61,5 +65,13 @@ public class Movie {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }
