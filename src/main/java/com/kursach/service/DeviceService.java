@@ -2,9 +2,7 @@ package com.kursach.service;
 
 
 import com.kursach.entity.Device;
-import com.kursach.entity.Movie;
 import com.kursach.repository.DeviceRepository;
-import com.kursach.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
