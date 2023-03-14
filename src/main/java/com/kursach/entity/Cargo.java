@@ -18,9 +18,9 @@ public class Cargo {
 
     private String cityTo;
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate dataFrom;
+    private LocalDate dateFrom;
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate daraTo;
+    private LocalDate dateTo;
 
     public Cargo(){
 
@@ -66,19 +66,19 @@ public class Cargo {
         this.cityTo = cityTo;
     }
 
-    public LocalDate getDataFrom() {
-        return dataFrom;
+    public LocalDate getDateFrom() {
+        return dateFrom;
     }
 
-    public void setDataFrom(LocalDate dataFrom) {
-        this.dataFrom = dataFrom;
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
-    public LocalDate getDaraTo() {
-        return daraTo;
+    public LocalDate getDateTo() {
+        return dateTo;
     }
 
-    public void setDaraTo(LocalDate daraTo) {
-        this.daraTo = daraTo;
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
     }
 }
