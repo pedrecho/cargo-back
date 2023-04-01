@@ -2,7 +2,6 @@ package com.kursach.service;
 
 import com.kursach.entity.Cargo;
 import com.kursach.repository.CargoRepository;
-import com.kursach.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
