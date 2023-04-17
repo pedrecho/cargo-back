@@ -30,7 +30,7 @@ public class CargoController {
     }
 
     @PostMapping(path = "/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public HttpStatus Delete(@PathVariable(name = "id") Long id){
         return cargoService.Delete(id);
     }
@@ -42,7 +42,7 @@ public class CargoController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     public HttpStatus Save(Cargo cargo){
         return cargoService.Save(cargo);
     }
