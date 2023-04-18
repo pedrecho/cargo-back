@@ -14,7 +14,7 @@ public class Autoblog {
     private Long id;
     private String name;
     private String content;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime publishedAt;
 
     public Autoblog(){
